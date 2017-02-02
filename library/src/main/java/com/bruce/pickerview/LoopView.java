@@ -63,6 +63,7 @@ public class LoopView extends View {
     private int mWidgetHeight;
     private int mCircularRadius;
     private int mWidgetWidth;
+    private Typeface mTypeface;
 
 
     public Handler mHandler = new Handler(new Handler.Callback() {
@@ -77,6 +78,7 @@ public class LoopView extends View {
             return false;
         }
     });
+    private Typeface typeface;
 
     public LoopView(Context context) {
         this(context, null);
@@ -140,17 +142,23 @@ public class LoopView extends View {
         mTopBottomTextPaint.setAntiAlias(true);
         mTopBottomTextPaint.setTypeface(Typeface.MONOSPACE);
         mTopBottomTextPaint.setTextSize(mTextSize);
+        if(mTypeface != null)
+            mTopBottomTextPaint.setTypeface(mTypeface);
 
         mCenterTextPaint.setColor(mCenterTextColor);
         mCenterTextPaint.setAntiAlias(true);
         mCenterTextPaint.setTextScaleX(1.05F);
         mCenterTextPaint.setTypeface(Typeface.MONOSPACE);
         mCenterTextPaint.setTextSize(mTextSize);
+        if(mTypeface != null)
+            mCenterTextPaint.setTypeface(mTypeface);
 
         mCenterLinePaint.setColor(mCenterLineColor);
         mCenterLinePaint.setAntiAlias(true);
         mCenterLinePaint.setTypeface(Typeface.MONOSPACE);
         mCenterLinePaint.setTextSize(mTextSize);
+        if(mTypeface != null)
+            mCenterLinePaint.setTypeface(mTypeface);
 
         measureTextWidthHeight();
 
@@ -401,6 +409,14 @@ public class LoopView extends View {
         cancelSchedule();
         int velocityFling = 20;
         mScheduledFuture = mExecutor.scheduleWithFixedDelay(new FlingRunnable(velocityY), 0, velocityFling, TimeUnit.MILLISECONDS);
+    }
+
+    public void setTypeface(Typeface typeface) {
+        this.mTypeface = typeface;
+    }
+
+    public Typeface getTypeface() {
+        return mTypeface;
     }
 
     class LoopViewGestureListener extends android.view.GestureDetector.SimpleOnGestureListener {

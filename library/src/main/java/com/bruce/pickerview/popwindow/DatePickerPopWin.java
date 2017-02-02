@@ -3,6 +3,7 @@ package com.bruce.pickerview.popwindow;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -57,6 +58,7 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
     private int btnTextsize;//text btnTextsize of cancel and confirm button
     private int viewTextSize;
     private boolean showDayMonthYear;
+    private Typeface typeface;
 
     List<String> yearList = new ArrayList();
     List<String> monthList = new ArrayList();
@@ -83,6 +85,7 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
         private int colorConfirm = Color.parseColor("#303F9F");
         private int btnTextSize = 16;//text btnTextsize of cancel and confirm button
         private int viewTextSize = 25;
+        private Typeface typeface;
 
         public Builder minYear(int minYear){
             this.minYear = minYear;
@@ -133,6 +136,11 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
             return this;
         }
 
+        public Builder typeface(Typeface typeface){
+            this.typeface = typeface;
+            return this;
+        }
+
         public DatePickerPopWin build(){
             if(minYear > maxYear){
                 throw new IllegalArgumentException();
@@ -158,6 +166,7 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
         this.btnTextsize = builder.btnTextSize;
         this.viewTextSize = builder.viewTextSize;
         this.showDayMonthYear = builder.showDayMonthYear;
+        this.typeface = builder.typeface;
         setSelectedDate(builder.dateChose);
         initView();
     }
@@ -209,6 +218,15 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
                 dayPos = item;
             }
         });
+
+        monthLoopView.setTextSize(viewTextSize);
+        monthLoopView.setTypeface(typeface);
+
+        dayLoopView.setTextSize(viewTextSize);
+        dayLoopView.setTypeface(typeface);
+
+        yearLoopView.setTextSize(viewTextSize);
+        yearLoopView.setTypeface(typeface);
 
         initPickerViews(); // init year and month loop view
         initDayPickerView(); //init day loop view
