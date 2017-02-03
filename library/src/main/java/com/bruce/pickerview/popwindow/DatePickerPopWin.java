@@ -237,7 +237,7 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
 
         if(typeface != null){
             confirmBtn.setTypeface(typeface);
-            confirmBtn.setTypeface(typeface);
+            cancelBtn.setTypeface(typeface);
         }
 
         if(!TextUtils.isEmpty(textConfirm)){
